@@ -1,6 +1,4 @@
 const knex = require("knex");
-const router = require("express").Router();
-
 
 const knexConfig = {
     client: "sqlite3",
@@ -22,14 +20,14 @@ module.exports = {
 }
 
 function find() {
+    return db('zoos')
+}
+
+function findById(id) {
     return null
 }
 
-function findById() {
-    return null
-}
-
-function add() {
+async function add(zoo) {
     return null
 }
 
