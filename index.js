@@ -7,6 +7,8 @@ server.use(express.json());
 server.use(helmet());
 
 // endpoints here
+const zoosRouter = require('./zoos/zoos-router');
+server.use('api/zoos', zoosRouter)
 
 const port = 3300;
 server.listen(port, function() {
