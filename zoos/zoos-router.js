@@ -24,9 +24,10 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-     db('zoos')
-    .where({ id: req.params.id})
-    .first()
+    Zoos.findById(req.params.id)
+    //  db('zoos')
+    // .where({ id: req.params.id})
+    // .first()
     .then(zoo => {
       if (zoo) {
         res.status(200).json(zoo);
@@ -40,8 +41,10 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-    db("zoos")
-    .insert(req.body, "id")
+    
+    Zoos.add(req.body, "id")
+    // db("zoos")
+    // .insert(req.body, "id")
     .then(zoo => {
         res.status(201).json(zoo)
     }) 
@@ -51,10 +54,11 @@ router.post("/", (req, res) => {
 })
 
 router.put("/:id", (req, res) => {
-    const changes = req.body;
-    db('zoos')
-    .where({ id: req.params.id })
-    .update(changes)
+    Zoos.update(req.params.id, req.body)
+    // const changes = req.body;
+    //  db('zoos')
+    // .where({ id: req.params.id })
+    // .update(changes)
     .then(count => {
         if (count > 0) {
             res.status(200).json({ message: `${count} records updated` })

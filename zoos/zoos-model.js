@@ -24,15 +24,32 @@ function find() {
 }
 
 function findById(id) {
-    return null
+    return db('zoos')
+    .where ({ id })
+    .first()
 }
 
-async function add(zoo) {
-    return null
+ function add(zoo) {
+    return db('zoos')
+    .insert(zoo, 'id')
+    .then(ids => {
+        const [id] = ids;
+        return findById(id)
+    })
 }
 
-function update() {
-    return null
+
+function update(id, changes) {
+    return db('zoos')
+    .where({ id })
+    .update(changes)
+    .then(count => {
+        if (count > 0) {
+            return findById(id);
+        } else {
+            return null;
+        }
+    })
 }
 
 function remove() {
